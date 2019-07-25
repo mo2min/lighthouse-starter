@@ -9,12 +9,22 @@ type Query {
     user(id: ID @eq): User @find(model: "App\\User")
     shaderConfigs: [ShaderConfigs!]! @all
     shaderLabels: [ShaderConfigs!]!
+    customersAllActive: [Customers!]! @all
+    customersAllInactive: [Customers!]! @all
+    trashedCustomers(with: Boolean!): [Customers!]!
     shaderLabelsWhere(title: String! @where(operator: "="), orderBy: [OrderByClause!] @orderBy): [ShaderConfigs!]! @all
 }
 
 type Mutation {
     createUser(name: String!, email: String!, password: String!): User! @create
     createShaderConfig(user_id: Int!, title: String!, content: String!): ShaderConfigs! @create
+    createCustomer(name: String!,
+        debt: Float,
+        phone: String,
+        address: String,
+        notes: String,
+        is_self: Int ): Customers! @create
+    deleteCustomer(id: ID!): Customers @delete
 }
 
 type User {
@@ -30,4 +40,13 @@ type ShaderConfigs {
     title: String!
     content: String!
     user: User! @belongsTo
+}
+
+type Customers {
+    id: ID!
+    debt: Float
+    phone: String
+    address: String
+    notes: String
+    is_self: Int
 }
