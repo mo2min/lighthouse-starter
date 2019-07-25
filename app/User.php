@@ -40,4 +40,5 @@ class User extends Authenticatable
     public function shader_Configs() {
         return $this->hasMany(ShaderConfigs::Class);
     }
+
 }

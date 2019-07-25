@@ -8,6 +8,13 @@ type Query {
     users: [User!]! @paginate(type: "paginator" model: "App\\User")
     user(id: ID @eq): User @find(model: "App\\User")
     shaderConfigs: [ShaderConfigs!]! @all
+    shaderLabels: [ShaderConfigs!]!
+    shaderLabelsWhere(title: String! @where(operator: "="), orderBy: [OrderByClause!] @orderBy): [ShaderConfigs!]! @all
+}
+
+type Mutation {
+    createUser(name: String!, email: String!, password: String!): User! @create
+    createShaderConfig(user_id: Int!, title: String!, content: String!): ShaderConfigs! @create
 }
 
 type User {
