@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('customers', 'CustomersCtrl@index');
+Route::get('customers/inactive', 'CustomersCtrl@inactive');
+Route::get('customers/{id}', 'CustomersCtrl@show');
+Route::post('customers', 'CustomersCtrl@store');
+Route::put('customers/{id}', 'CustomersCtrl@update');
+Route::delete('customers/{id}', 'CustomersCtrl@delete');
+Route::patch('customers/{id}', 'CustomersCtrl@restore');

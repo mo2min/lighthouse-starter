@@ -10,7 +10,7 @@ type Query {
     shaderConfigs: [ShaderConfigs!]! @all
     shaderLabels: [ShaderConfigs!]!
     customersAllActive: [Customers!]! @all
-    customersAllInactive: [Customers!]! @all
+    customersAllInactive(created_at: DateRange @whereBetween): [Customers!]! @all
     trashedCustomers(with: Boolean!): [Customers!]!
     shaderLabelsWhere(title: String! @where(operator: "="), orderBy: [OrderByClause!] @orderBy): [ShaderConfigs!]! @all
 }
@@ -49,4 +49,9 @@ type Customers {
     address: String
     notes: String
     is_self: Int
+}
+
+input DateRange {
+    from: Date!
+    to: Date!
 }
